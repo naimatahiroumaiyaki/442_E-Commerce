@@ -1,4 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once "../core/core.php";
+require_once "../controllers/CustomerController.php";
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect("../views/register.php");
+}
 
 require_once "../core/core.php";
 require_once "../controllers/CustomerController.php";
@@ -32,6 +41,15 @@ if (
 // Validate email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['error'] = 'Invalid email address.';
+    redirect("../views/register.php");
+}
+if (
+    strlen($pass) < 8 ||
+    !preg_match('/[A-Z]/', $pass) ||
+    !preg_match('/[a-z]/', $pass) ||
+    !preg_match('/[0-9]/', $pass)
+) {
+    $_SESSION['error'] = 'Password must be at least 8 characters and contain an uppercase letter, a lowercase letter, and a number.';
     redirect("../views/register.php");
 }
 

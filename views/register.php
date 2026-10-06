@@ -9,39 +9,195 @@ require_once "../core/core.php";
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Customer Registration</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 520px;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .auth-card h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group input:focus {
+            border-color: #25ebe8;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            border-radius: 7px;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            display: block;
+            color: #dc2626;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: #25ebd1;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background: #1dc2d8;
+        }
+
+        @media (max-width: 600px) {
+
+            .auth-container {
+                padding: 20px 15px;
+            }
+
+            .auth-card {
+                padding: 25px 20px;
+            }
+
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+        }
+
+        .login-link a {
+            color: #25deeb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .password-hint {
+            display: block;
+            margin-top: 6px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+    </style>
+
 </head>
 
+
+
 <body>
-    <h1>Customer Registration</h1>
 
-    <?php
-    if (isset($_SESSION['error'])) {
-        echo "<p>" . htmlspecialchars($_SESSION['error']) . "</p>";
-        unset($_SESSION['error']);
-    }
-    ?>
+<div class="auth-container">
 
-    <form id="registerForm" action="../actions/register_action.php" method="POST">
+    <div class="auth-card">
 
-        <div>
-            <label>Full Name</label>
-            <input type="text" name="name" id="name">
-            <span class="error" id="nameError"></span>
-        </div>
+        <h1>Customer Registration</h1>
 
-        <div>
-            <label>Email</label>
-            <input type="email" name="email" id="email">
-            <span class="error" id="emailError"></span>
-        </div>
+        <p class="subtitle">
+            Create your customer account.
+        </p>
 
-        <div>
-            <label>Password</label>
-            <input type="password" name="pass" id="pass">
-            <span class="error" id="passError"></span>
-        </div>
+        <?php
+        if (isset($_SESSION['error'])) {
+            echo '<div class="error-message">'
+                . htmlspecialchars($_SESSION['error'])
+                . '</div>';
+            unset($_SESSION['error']);
+        }
+        ?>
 
-        <div>
+        <form id="registerForm"
+              action="../actions/register_action.php"
+              method="POST">
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" id="name">
+                <span class="error" id="nameError"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" id="email">
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <small class="password-hint">
+                    Password must contain at least 8 characters, one uppercase letter,
+                    one lowercase letter, and one number.
+                </small>
+                <input type="password" name="pass" id="pass">
+                <span class="error" id="passError"></span>
+            </div>
+
+
+        <div class = "form-group">
             <label>Country</label>
 
             <input type="text"
@@ -172,32 +328,40 @@ require_once "../core/core.php";
             <span class="error" id="countryError"></span>
         </div>
 
-        <div>
+        <div class = "form-group">
             <label>City</label>
             <input type="text" name="city" id="city">
             <span class="error" id="cityError"></span>
         </div>
 
-        <div>
+        <div class = "form-group">
             <label>Contact Number</label>
             <input type="text" name="contact" id="contact">
             <span class="error" id="contactError"></span>
         </div>
 
-        <div>
+        <div class = "form-group">
             <label>Address</label>
             <input type="text" name="address" id="address">
         </div>
 
-        <div>
+        <div class = "form-group">
             <label>Profile Image (Optional)</label>
             <input type="file" name="customer_image" id="customer_image">
         </div>
 
-        <div>
-            <button type="submit" id="registerButton">Register</button>
+        <div class = "form-group">
+            <button type="submit"
+                id="registerButton"
+                class = "register-button">
+                Register
+            </button>
         </div>
 
+        <div class="login-link">
+            Already registered?
+            <a href="login.php">Login</a>
+        </div>
     </form>
 
     <script src="../js/validate.js"></script>

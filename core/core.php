@@ -41,7 +41,7 @@ function require_admin()
 {
     if (!is_admin()) {
         $_SESSION['error'] = 'Access denied. Admins only!';
-        redirect("../index.php");
+        redirect("../../index.php");
     }
 }
 ?>
