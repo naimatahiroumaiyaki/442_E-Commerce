@@ -135,7 +135,33 @@ if (isset($_GET['edit_id'])) {
 <div class="category-container">
 
     <h1>Manage Categories</h1>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:25px;">
 
+        <a href="../../index.php"
+        style="padding:10px 15px; background:#374151; color:white;
+        text-decoration:none; border-radius:6px;">
+            Home
+        </a>
+
+        <a href="brand.php"
+        style="padding:10px 15px; background:#0891b2; color:white;
+        text-decoration:none; border-radius:6px;">
+            Manage Brands
+        </a>
+
+        <a href="product.php"
+        style="padding:10px 15px; background:#0891b2; color:white;
+        text-decoration:none; border-radius:6px;">
+            Add Product
+        </a>
+
+        <a href="product_list.php"
+        style="padding:10px 15px; background:#0891b2; color:white;
+        text-decoration:none; border-radius:6px;">
+            Product List
+        </a>
+
+    </div>
     <?php
 
     if (isset($_SESSION['success'])) {
@@ -189,7 +215,7 @@ if (isset($_GET['edit_id'])) {
 
         <tr>
             <th>Category Name</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
 
         <?php foreach ($categories as $category): ?>
@@ -205,6 +231,23 @@ if (isset($_GET['edit_id'])) {
                        href="?edit_id=<?php echo $category['cat_id']; ?>">
                         Edit
                     </a>
+                    <form action="../../actions/delete_category_action.php"
+                        method="POST"
+                        style="display:inline;"
+                        onsubmit="return confirm('Are you sure you want to delete this category?');">
+
+                        <input type="hidden"
+                            name="cat_id"
+                            value="<?php echo (int)$category['cat_id']; ?>">
+
+                        <button type="submit"
+                                style="background:#dc2626; color:white; padding:8px 14px;
+                                    border:none; border-radius:6px; cursor:pointer;
+                                    margin-left:5px;">
+                            Delete
+                        </button>
+
+                    </form>
                 </td>
 
             </tr>

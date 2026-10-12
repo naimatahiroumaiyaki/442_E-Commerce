@@ -47,6 +47,98 @@ class ProductController
     {
         return $this->product->updateCategory($id, $name);
     }
+
+        public function addProduct(
+        $cat,
+        $brand,
+        $title,
+        $price,
+        $desc,
+        $image_filename,
+        $keywords
+    ) {
+        return $this->product->addProduct(
+            $cat,
+            $brand,
+            $title,
+            $price,
+            $desc,
+            $image_filename,
+            $keywords
+        );
+    }
+
+
+    // Update an existing product
+    public function updateProduct(
+        $id,
+        $cat,
+        $brand,
+        $title,
+        $price,
+        $desc,
+        $image_filename,
+        $keywords
+    ) {
+        return $this->product->updateProduct(
+            $id,
+            $cat,
+            $brand,
+            $title,
+            $price,
+            $desc,
+            $image_filename,
+            $keywords
+        );
+    }
+
+
+    // Retrieve one product for editing
+    public function getProductById($id)
+    {
+        return $this->product->getProductById($id);
+    }
+
+    public function getAllProducts()
+    {
+        return $this->product->getAllProducts();
+    }
+
+    public function deleteBrand($id)
+    {
+        return $this->product->deleteBrand($id);
+    }
+
+   public function deleteCategory($id)
+    {
+        return $this->product->deleteCategory($id);
+    }
+
+    public function deleteProduct($id)
+    {
+        return $this->product->deleteProduct($id);
+    } 
+
+
+    public function getFeaturedProducts($limit = 6)
+    {
+        return $this->product->getFeaturedProducts($limit);
+    }
+
+    public function getProductsByCategory($cat_id)
+    {
+        return $this->product->getProductsByCategory($cat_id);
+    }
+
+    public function getProductsByBrand($brand_id)
+    {
+        return $this->product->getProductsByBrand($brand_id);
+    }
+
+    public function searchProducts($query)
+    {
+        return $this->product->searchProducts($query);
+    }
 }
 
 

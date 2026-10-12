@@ -1,26 +1,29 @@
 <?php
-require_once '../core/core.php';
+
+require_once __DIR__ . '/../core/core.php';
 require_admin();
 
-require_once '../controllers/ProductController.php';
+require_once __DIR__ . '/../controllers/ProductController.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('../views/admin/brand.php');
 }
 
-$name = trim(strip_tags($_POST['brand_name'] ?? ''));
+$name = trim($_POST['brand_name'] ?? '');
 
 if ($name === '') {
-    $_SESSION['error'] = 'Brand name is required.';
+    $_SESSION['error'] = 'Please enter a brand name.';
     redirect('../views/admin/brand.php');
 }
 
 $controller = new ProductController();
 
-if ($controller->addBrand($name)) {
-    $_SESSION['success'] = 'Brand added.';
+$success = $controller->addBrand($name);
+
+if ($success) {
+    $_SESSION['success'] = 'Brand added successfully!';
 } else {
-    $_SESSION['error'] = 'Failed to add brand.';
+    $_SESSION['error'] = 'Unable to add the brand. Please try again.';
 }
 
 redirect('../views/admin/brand.php');

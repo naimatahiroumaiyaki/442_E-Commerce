@@ -105,7 +105,7 @@ $base_url = "/~naima.maiyaki/ECommerce_Labs/shoppn";
         <?php else: ?>
 
             <span class="welcome-user">
-                Welcome,
+                Ninja,
                 <?php echo htmlspecialchars($_SESSION['customer_name']); ?>
             </span>
 
@@ -118,12 +118,22 @@ $base_url = "/~naima.maiyaki/ECommerce_Labs/shoppn";
 
                 <a class="admin-link"
                    href="<?php echo $base_url; ?>/views/admin/brand.php">
-                    Brand
+                    Add Brand
                 </a>
 
                 <a class="admin-link"
                    href="<?php echo $base_url; ?>/views/admin/category.php">
-                    Category
+                    Add Category
+                </a>
+
+                <a class="admin-link"
+                    href="<?php echo $base_url; ?>/views/admin/product.php">
+                        Add Product
+                </a>
+
+                <a class="admin-link"
+                    href="<?php echo $base_url; ?>/views/admin/product_list.php">
+                        Product List
                 </a>
 
             <?php endif; ?>
